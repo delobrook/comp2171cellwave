@@ -59,7 +59,7 @@ public class profitLostUI extends JPanel {
 				if ((float)calculateprofit_Loss(textField.getText(),textField_1.getText())==0){
 					lblresult.setText("Product was not sold ");
 				}else {
-					lblresult.setText(String.valueOf(calculateprofit_Loss(textField.getText(),textField_1.getText())));
+					lblresult.setText(String.valueOf("$"+calculateprofit_Loss(textField.getText(),textField_1.getText())));
 				}
 			}
 		});

@@ -73,6 +73,9 @@ public class CustomerInformationUI extends JPanel {
 				if (selrow>=0) {
 					tmodel.removeRow(selrow);
 					theCustomerInformation.deletecustomer(selrow);
+					for (int i=0;i<table.getRowCount();i++) {
+						tmodel.removeRow(i);
+					}
 					if(theCustomerInformation.gettheCustomerInformationFile().writetoCustomerInformationFile(theCustomerInformation.getCustomerInformation())==true) {
 						for (int i=0; i<theCustomerInformation.getCustomerInformation().size(); i++){
 							tmodel.addRow(theCustomerInformation.getCustomerInformation().get(i).print());

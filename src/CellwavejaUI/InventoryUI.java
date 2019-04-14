@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.BorderLayout;
 import javax.swing.JTable;
@@ -26,6 +28,7 @@ public class InventoryUI extends JPanel {
 	ArrayList <String> productimagename;
 	DefaultTableModel tmodel=new DefaultTableModel();
 	Inventory theInventory=new Inventory();
+	int selrow;
 	/**
 	 * Create the panel.
 	 */
@@ -61,11 +64,15 @@ public class InventoryUI extends JPanel {
 		JButton btnNewButton_1 = new JButton("",new ImageIcon(InventoryUI.class.getResource("\\images\\trashcanicon.PNG")));
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int selrow=table.getSelectedRow();
+				
+				selrow=table.getSelectedRow();
 				if (selrow>=0) {
 					tmodel.removeRow(selrow);
 					theInventory.deleteProduct(selrow);
 					productimagename.remove(selrow);
+					for (int i=0;i<table.getRowCount();i++) {
+						tmodel.removeRow(i);
+					}
 					if(theInventory.getInventoryFile().writeToProductFile(theInventory.getProductInformation())==true) {
 						for (int i=0; i<theInventory.getProductInformation().size(); i++){
 							tmodel.addRow(theInventory.getProductInformation().get(i).print());
@@ -98,7 +105,23 @@ public class InventoryUI extends JPanel {
 		btnUpdate.setToolTipText("update file with changes you made");
 		panel.add(btnUpdate);
 		
-		
+		JButton btnSellProduct = new JButton("Sell This Product");//updates information
+		btnSellProduct.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				selrow=table.getSelectedRow();
+				if (selrow==-1) {
+					JOptionPane.showMessageDialog(null, "SELECT A PRODUCT TO SELL", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+				}else {
+					removeAll();
+					Product selProduct=theInventory.getProductInformation().get(selrow);
+					add(new AddnewTransactiontofile(selProduct.getModelNumber(),selProduct.getProductName(),selProduct.getColour(),selProduct.getProductType()));
+					revalidate();
+				}
+			}
+		});
+		btnSellProduct.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		btnSellProduct.setToolTipText("Select product to make a transaction");
+		panel.add(btnSellProduct);
 		
 
 	}

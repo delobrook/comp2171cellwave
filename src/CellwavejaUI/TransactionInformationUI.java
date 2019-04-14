@@ -64,7 +64,17 @@ public class TransactionInformationUI extends JPanel {
 				int selrow=table.getSelectedRow();
 				if (selrow>=0) {
 					tmodel.removeRow(selrow);
+					Inventory theInventory=new Inventory();
+					for(int i=0;i<theInventory.getProductInformation().size();i++) {
+						if(theTransactionInformation.getTransactionInformation().get(i).getProductModelNumber().equals(theInventory.getProductInformation().get(i).getModelNumber())&&theTransactionInformation.getTransactionInformation().get(i).getProductName().equals(theInventory.getProductInformation().get(i).getProductName())){
+							theInventory.getProductInformation().get(i).setQuantity(theInventory.getProductInformation().get(i).getQuantity()+theTransactionInformation.getTransactionInformation().get(selrow).getQuantitypurchased());
+						}
+					}
 					theTransactionInformation.deleteTransaction(selrow);
+					
+					for (int i=0;i<table.getRowCount();i++) {
+						tmodel.removeRow(i);
+					}
 					if(theTransactionInformation.getTheTransactionInformationFile().writeToTransactionFile(theTransactionInformation.getTransactionInformation())==true) {
 						for (int i=0; i<theTransactionInformation.getTransactionInformation().size(); i++){
 							tmodel.addRow(theTransactionInformation.getTransactionInformation().get(i).print());
@@ -78,6 +88,8 @@ public class TransactionInformationUI extends JPanel {
 		btnNewButton_1.setPreferredSize(new Dimension(30,30));
 		panel.add(btnNewButton_1);
 	}
+	
+	
 	public JTable viewTransactionInformation() {
 		tmodel.addColumn("Transaction #");
 		tmodel.addColumn("Customer ID");
