@@ -65,6 +65,7 @@ public class addproductinformationGUI extends JPanel {
 	
 
 	private String productImageName;
+	private String productImagePath=null;
 	private RenderedImage rImage;
 	private File saveFile;
 	/**
@@ -197,7 +198,7 @@ public class addproductinformationGUI extends JPanel {
 						ioe.printStackTrace();
 					}*/
 					removeAll();
-					theInventory.addNewProduct(Product.createProduct(modelNumber, productName, productType, description, costPrice, sellingPrice, quantity, imageName, colour));
+					theInventory.addNewProduct(Product.createProduct(modelNumber, productName, productType, description, costPrice, sellingPrice, quantity, productImagePath, colour));
 					if(theInventory.getInventoryFile().writeToProductFile((theInventory.getProductInformation()))==true) {
 						theInventory.notifyObserversofSuccessfuladdition(1);
 					}
@@ -236,6 +237,7 @@ public class addproductinformationGUI extends JPanel {
 				if(result==productImageLoc.APPROVE_OPTION) {
 					File selectedImage= productImageLoc.getSelectedFile();
 					String imagePath=selectedImage.getAbsolutePath();
+					productImagePath=selectedImage.getAbsolutePath();
 					Image i= new ImageIcon(imagePath).getImage();
 					Image newi=i.getScaledInstance(493,421 , Image.SCALE_SMOOTH);
 					lblNewLabel_2.setIcon(new ImageIcon(newi));

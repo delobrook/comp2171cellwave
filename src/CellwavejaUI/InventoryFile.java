@@ -51,7 +51,7 @@ public class InventoryFile {
 				FileWriter filew= new FileWriter(productInfo);
 				BufferedWriter buffw=new BufferedWriter(filew);
 				for(Core.Product p: products) {
-					buffw.write(p.getModelNumber()+"//"+p.getProductName()+"//"+ p.getProductType() +"//"+p.getDescription()+"//"+p.getCostPrice()+"//"+p.getSellingPrice()+"//"+p.getQuantity()+"//"+p.getImageName()+"//"+p.getColour()+"\n" );
+					buffw.write(p.getModelNumber()+"//"+p.getProductName()+"//"+ p.getProductType() +"//"+p.getDescription()+"//"+p.getCostPrice()+"//"+p.getSellingPrice()+"//"+p.getQuantity()+"//"+p.getImagePath()+"//"+p.getColour()+"\n" );
 				}
 				buffw.close();
 				return true;
@@ -68,7 +68,7 @@ public class InventoryFile {
 				FileWriter filew= new FileWriter(productInfo);
 				BufferedWriter buffw=new BufferedWriter(filew);
 				for(Core.Product p: products) {
-					buffw.write(p.getModelNumber()+"//"+p.getProductName()+"//"+ p.getProductType() +"//"+p.getDescription()+"//"+p.getCostPrice()+"//"+p.getSellingPrice()+"//"+p.getQuantity()+"//"+p.getImageName()+"//"+p.getColour()+"\n" );
+					buffw.write(p.getModelNumber()+"//"+p.getProductName()+"//"+ p.getProductType() +"//"+p.getDescription()+"//"+p.getCostPrice()+"//"+p.getSellingPrice()+"//"+p.getQuantity()+"//"+p.getImagePath()+"//"+p.getColour()+"\n" );
 				}
 				buffw.write("hello ");
 				buffw.close();

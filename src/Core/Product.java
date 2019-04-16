@@ -13,13 +13,13 @@ public class Product {
 	private Float sellingPrice;
 	private int quantity;
 	private String modelNumber;
-	private String imageName;
+	private String productImagePath;
 
 
 	public Product(){}	
 
 	public Product(String modelNumber, String productName, String productType, String description,
-					Float costPrice, Float sellingPrice, int quantity, String imageName, String colour) {
+					Float costPrice, Float sellingPrice, int quantity, String productImagePath, String colour) {
 
 		this.modelNumber = modelNumber;
 		this.productName = productName;
@@ -28,15 +28,15 @@ public class Product {
 		this.costPrice = costPrice;
 		this.sellingPrice = sellingPrice;
 		this.quantity = quantity;
-		this.imageName = imageName;
+		this.productImagePath = productImagePath;
 		this.colour = colour;
 
 	}
 
 	public static Product createProduct(String modelNumber, String productName, String productType, String description,
-										Float costPrice, Float sellingPrice, int quantity, String imageName, String colour){
+										Float costPrice, Float sellingPrice, int quantity, String productImagePath, String colour){
 
-		Product newProduct = new Product(modelNumber, productName, productType, description, costPrice, sellingPrice, quantity, imageName, colour);
+		Product newProduct = new Product(modelNumber, productName, productType, description, costPrice, sellingPrice, quantity, productImagePath, colour);
 		return newProduct;								
 	}
 
@@ -78,8 +78,8 @@ public class Product {
 	public String getDescription() {
 		return description;
 	}
-	public String getImageName(){
-		return imageName;
+	public String getImagePath(){
+		return productImagePath;
 	}
 
 	public String[] print(){

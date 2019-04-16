@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.BorderLayout;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
@@ -17,9 +18,16 @@ import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
+
 import javax.swing.JTextField;
 import javax.swing.Popup;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
+
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 
 public class InventoryUI extends JPanel {
@@ -35,6 +43,12 @@ public class InventoryUI extends JPanel {
 	public InventoryUI() {
 		theInventory.attachObserver(Manager.getInstance());
 		setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_1 = new JPanel();
+		add(panel_1, BorderLayout.EAST);
+		
+		JLabel lblNewLabel = new JLabel("");
+		panel_1.add(lblNewLabel);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		add(scrollPane, BorderLayout.CENTER);
@@ -123,6 +137,48 @@ public class InventoryUI extends JPanel {
 		btnSellProduct.setToolTipText("Select product to make a transaction");
 		panel.add(btnSellProduct);
 		
+		table.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				if (table.getSelectedRow()==-1) {
+					
+				}else {
+					Image i= new ImageIcon(theInventory.getProductInformation().get(table.getSelectedRow()).getImagePath()).getImage();
+					Image newi=i.getScaledInstance(493,421 , Image.SCALE_SMOOTH);
+					lblNewLabel.setIcon(new ImageIcon(newi));
+				}
+			}
+
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+		});
+		
+		
+		
 
 	}
 	public JTable viewInventory(){
@@ -152,14 +208,16 @@ public class InventoryUI extends JPanel {
 		});
 		productimagename =new ArrayList<String>();
 		for(Product p:theInventory.getProductInformation()) {
-			productimagename.add(p.getImageName());
+			productimagename.add(p.getImagePath());
 		}
 		for (int i=0; i<theInventory.getProductInformation().size(); i++){
 			tmodel.addRow(theInventory.getProductInformation().get(i).print());
 		}
 		table.setModel(tmodel);
 		return table;
+		
 	}
+	
 
 }
 
